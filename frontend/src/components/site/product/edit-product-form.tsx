@@ -18,6 +18,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "@/hooks/use-toast";
 import { ProductType } from "@/types/api.type";
 
+const baseURL = import.meta.env.VITE_IMAGE_BASE_URL;
+
 export default function EditProductForm(props: { onClose: () => void; data: ProductType }) {
   const { onClose, data } = props;
 
@@ -182,7 +184,7 @@ export default function EditProductForm(props: { onClose: () => void; data: Prod
                         {/* Show existing image preview if no new file is selected */}
                         {typeof field.value === "string" && (
                           <img
-                            src={`http://localhost:8000/${field.value}`}
+                            src={`${baseURL}/${field.value}`}
                             alt="Current product"
                             className="mt-2 w-32 h-32 object-cover rounded border"
                           />

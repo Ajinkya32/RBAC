@@ -1,11 +1,12 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
-
 import { DataTableColumnHeader } from "./table-column-header";
 import { DataTableRowActions } from "./table-row-actions";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ProductType } from "@/types/api.type";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
+
+const baseURL = import.meta.env.VITE_IMAGE_BASE_URL;
 
 export const getColumns = (): ColumnDef<ProductType>[] => {
   const columns: ColumnDef<ProductType>[] = [
@@ -41,7 +42,7 @@ export const getColumns = (): ColumnDef<ProductType>[] => {
           <div className="flex items-center gap-1">
             <Avatar className="h-10 w-10">
               <AvatarImage
-                src={row.original.image ? `http://localhost:8000/${row.original.image}` : ""}
+                src={row.original.image ? `${baseURL}/${row.original.image}` : ""}
                 alt={row.original.name}
                 className="object-cover"
               />

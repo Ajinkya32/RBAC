@@ -17,6 +17,8 @@ import { createProductMutationFn } from "@/lib/api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "@/hooks/use-toast";
 
+const baseURL = import.meta.env.VITE_IMAGE_BASE_URL;
+
 export default function CreateProductForm(props: { pageId?: string; onClose: () => void }) {
   const { onClose } = props;
 
@@ -152,11 +154,30 @@ export default function CreateProductForm(props: { pageId?: string; onClose: () 
                   <FormItem>
                     <FormLabel className="dark:text-[#f1f7feb5] text-sm">Image</FormLabel>
                     <FormControl>
-                      <Input
-                        type="file"
-                        className="!h-[48px]"
-                        onChange={(e) => field.onChange(e.target.files)}
-                      />
+                      <>
+                        <Input
+                          type="file"
+                          accept="image/*"
+                          className="!h-[48px]"
+                          onChange={(e) => field.onChange(e.target.files)}
+                        />
+                        {/* Show existing image preview if no new file is selected */}
+                        {typeof field.value === "string" && (
+                          <img
+                            src={`${baseURL}/${field.value}`}
+                            alt="Current product"
+                            className="mt-2 w-32 h-32 object-cover rounded border"
+                          />
+                        )}
+
+                        {field.value instanceof FileList && field.value.length > 0 && (
+                          <img
+                            src={URL.createObjectURL(field.value[0])}
+                            alt="Uploaded preview"
+                            className="mt-2 w-32 h-32 object-cover rounded border"
+                          />
+                        )}
+                      </>
                     </FormControl>
                     <FormMessage />
                   </FormItem>

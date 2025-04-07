@@ -1,7 +1,7 @@
 import { useState } from "react";
 import TableSkeleton from "@/components/skeleton-loaders/table-skeleton";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input"; // Assuming you have a styled input component
+import { Input } from "@/components/ui/input";
 import { createOrderMutationFn, getAllProductsQueryFn } from "@/lib/api";
 import { CreateOrderType, ProductType } from "@/types/api.type";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -9,6 +9,8 @@ import { Minus, Plus } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { useAuthContext } from "@/context/auth-provider";
 import { ConfirmDialog } from "@/components/resuable/confirm-dialog";
+
+const baseURL = import.meta.env.VITE_IMAGE_BASE_URL;
 
 export default function StoreList() {
   const { activeTeamId } = useAuthContext();
@@ -85,7 +87,7 @@ export default function StoreList() {
           className="w-40 md:w-60 bg-white shadow-md rounded-lg overflow-hidden border border-gray-200 dark:bg-gray-900 dark:border-gray-800"
         >
           <img
-            src={`http://localhost:8000${product.image}`}
+            src={`${baseURL}/${product.image}`}
             alt={product.name}
             className="w-full h-30 md:h-48 object-contain"
           />
