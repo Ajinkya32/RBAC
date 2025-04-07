@@ -19,7 +19,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { createUserMutationFn, fetchRoles, fetchTeams } from "@/lib/api";
+import { createUserMutationFn, fetchRolesQueryFn, fetchTeams } from "@/lib/api";
 import { toast } from "@/hooks/use-toast";
 
 import { Loader } from "lucide-react";
@@ -53,7 +53,7 @@ export default function AddUserForm(props: { onClose?: () => void }) {
 
   const { data: roles = [], isLoading: rolesLoading } = useQuery({
     queryKey: ["roles"],
-    queryFn: fetchRoles,
+    queryFn: fetchRolesQueryFn,
   });
 
   const { data: teams = [], isLoading: teamsLoading } = useQuery({

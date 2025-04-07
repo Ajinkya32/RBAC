@@ -78,16 +78,16 @@ export default function StoreList() {
   }
 
   return (
-    <div className="w-full relative flex flex-wrap gap-4">
+    <div className="w-full relative flex flex-wrap gap-4 md:gap-4">
       {data?.map((product: ProductType) => (
         <div
           key={product._id}
-          className="w-60 bg-white shadow-md rounded-lg overflow-hidden border border-gray-200 dark:bg-gray-900 dark:border-gray-800"
+          className="w-40 md:w-60 bg-white shadow-md rounded-lg overflow-hidden border border-gray-200 dark:bg-gray-900 dark:border-gray-800"
         >
           <img
             src={`http://localhost:8000${product.image}`}
             alt={product.name}
-            className="w-full h-48 object-contain"
+            className="w-full h-30 md:h-48 object-contain"
           />
           <div className="p-4">
             <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
@@ -118,7 +118,7 @@ export default function StoreList() {
                 min={1}
                 value={quantities[product._id] || 1}
                 onChange={(e) => handleQuantityChange(product._id, e.target.value)}
-                className="w-24 text-center"
+                className="w-10 md:w-24 text-center"
               />
 
               <Button
@@ -154,9 +154,9 @@ export default function StoreList() {
           isOpen={openDeleteDialog}
           isLoading={isPending}
           onClose={() => setOpenDialog(false)}
-          onConfirm={() => handleOrder(selectedProduct)}
+          onConfirm={() => selectedProduct && handleOrder(selectedProduct)}
           title="Place Order"
-          description={`Are you sure you want to Place Order for ${selectedProduct.name}?`}
+          description={`Are you sure you want to Place Order for ${selectedProduct?.name}?`}
           confirmText="Continue"
           cancelText="Cancel"
         />

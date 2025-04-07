@@ -1,3 +1,4 @@
+import { PermissionType } from "../enums/role.enum";
 import RoleModel from "../models/roles-permission.model";
 import UserModel from "../models/user.model";
 import { NotFoundException, UnauthorizedException } from "../utils/appError";
@@ -40,4 +41,15 @@ export const getAllRollsService = async () => {
   const roles = await RoleModel.find({}).exec();
 
   return roles;
+};
+
+export const updateRolePermissionsService = async (id: string, permissions: PermissionType[]) => {
+  const role = await RoleModel.findById(id);
+  if (!role) throw new NotFoundException("Role not found");
+
+  role.permissions = permissions;
+
+  await role.save();
+
+  return { message: "Permissions updated" };
 };

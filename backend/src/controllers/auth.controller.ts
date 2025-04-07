@@ -2,7 +2,13 @@ import { NextFunction, Request, Response } from "express";
 import { asyncHandler } from "../middlewares/asyncHandler.middleware";
 import { HTTPSTATUS } from "../config/http.config";
 import passport from "passport";
-import { getAllRollsService } from "../services/auth.service";
+import {
+  getAllRollsService,
+  getUserRole,
+  updateRolePermissionsService,
+} from "../services/auth.service";
+import { roleGuard } from "../utils/roleGuard";
+import { Permissions } from "../enums/role.enum";
 
 export const getAllRollsController = asyncHandler(async (req: Request, res: Response) => {
   const roles = await getAllRollsService();
@@ -59,5 +65,20 @@ export const logOutController = asyncHandler(async (req: Request, res: Response)
       res.clearCookie("connect.sid"); // replace with your actual session cookie name if different
       return res.status(200).json({ message: "Logged out successfully" });
     });
+  });
+});
+
+export const updateRolePermissionsController = asyncHandler(async (req, res) => {
+  const roleId = req.params.id;
+  const { permissions } = req.body;
+
+  const { role } = await getUserRole(req.user?._id);
+
+  roleGuard(role, [Permissions.EDIT_ROLE]);
+
+  await updateRolePermissionsService(roleId, permissions);
+
+  return res.status(HTTPSTATUS.OK).json({
+    message: "Permissions updated",
   });
 });

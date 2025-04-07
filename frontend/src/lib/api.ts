@@ -1,3 +1,4 @@
+import { PermissionType } from "@/constant";
 import API from "./axios-client";
 
 import {
@@ -27,6 +28,7 @@ import {
   EditOrderType,
   EditOrderResponseType,
   DeleteUserResponseType,
+  EditRoleResponseType,
 } from "@/types/api.type";
 
 export const loginMutationFn = async (data: loginType): Promise<LoginResponseType> => {
@@ -72,11 +74,6 @@ export const changeUserRoleMutationFn = async ({ userId, roleId }: ChangeUserRol
 export const fetchTeams = async () => {
   const response = await API.get("/team");
   return response.data.teams;
-};
-
-export const fetchRoles = async () => {
-  const response = await API.get("/auth/roles/all");
-  return response.data.roles;
 };
 
 export const setCurrentTeam = async (teamId: string) => {
@@ -139,11 +136,6 @@ export const getTeamByIdQueryFn = async (id: string) => {
   const response = await API.get(`/team/${id}`);
   return response.data.team;
 };
-
-// export const getMembersInTeamQueryFn = async (id: string) => {
-//   const response = await API.get(`/team/${id}/members`);
-//   return response.data.members;
-// };
 
 export const getAllTeamsUserIsMemberQueryFn = async () => {
   const response = await API.get(`/team/myTeams`);
@@ -241,4 +233,23 @@ export const updateOrderMutationFn = async ({
 export const deleteOrderMutationFn = async (id: string) => {
   const response = await API.put(`/order/delete/${id}`);
   return response.data.orders;
+};
+
+//******* ROLES ********************************
+//************************* */
+
+export const fetchRolesQueryFn = async () => {
+  const response = await API.get("/auth/roles/all");
+  return response.data.roles;
+};
+
+export const editRoleMutationFn = async ({
+  roleId,
+  permissions,
+}: {
+  roleId: string;
+  permissions: PermissionType[];
+}): Promise<EditRoleResponseType> => {
+  const response = await API.put(`/auth/roles/update/${roleId}`, { permissions });
+  return response.data.roles;
 };

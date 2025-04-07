@@ -15,7 +15,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { getAvatarColor, getAvatarFallbackText } from "@/lib/helper";
 import { useAuthContext } from "@/context/auth-provider";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { changeUserRoleMutationFn, deleteUserMutationFn, fetchRoles } from "@/lib/api";
+import { changeUserRoleMutationFn, deleteUserMutationFn, fetchRolesQueryFn } from "@/lib/api";
 import { toast } from "@/hooks/use-toast";
 import { Permissions } from "@/constant";
 import { useGetUsers } from "@/hooks/api/use-users";
@@ -42,7 +42,7 @@ const AllUsers = () => {
 
   const { data: roles = [], isLoading: rolesLoading } = useQuery({
     queryKey: ["roles"],
-    queryFn: fetchRoles,
+    queryFn: fetchRolesQueryFn,
   });
 
   const users = data || [];
@@ -129,8 +129,8 @@ const AllUsers = () => {
         const initials = getAvatarFallbackText(name);
         const avatarColor = getAvatarColor(name);
         return (
-          <div className="flex items-center justify-between space-x-4">
-            <div className="flex items-center space-x-4">
+          <div className="flex items-center justify-between space-x-4 flex-col md:flex-row">
+            <div className="flex items-center space-x-4 w-full justify-start">
               <Avatar className="h-8 w-8">
                 <AvatarFallback className={avatarColor}>{initials}</AvatarFallback>
               </Avatar>
@@ -139,7 +139,7 @@ const AllUsers = () => {
                 <p className="text-sm text-muted-foreground">{user.email}</p>
               </div>
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 w-full justify-end">
               <Popover>
                 <PopoverTrigger asChild>
                   <Button
@@ -228,9 +228,9 @@ const AllUsers = () => {
             setOpenDialog(false);
             setSelectedUser(undefined);
           }}
-          onConfirm={() => handleConfirm(selectedUser._id)}
+          onConfirm={() => selectedUser && handleConfirm(selectedUser._id)}
           title="Remove User"
-          description={`Are you sure you want to remove ${selectedUser.name} from site?`}
+          description={`Are you sure you want to remove ${selectedUser?.name} from site?`}
           confirmText="Remove"
           cancelText="Cancel"
         />
@@ -245,9 +245,11 @@ const AllUsers = () => {
             setSelectedUser(undefined);
             setSelectedRole(undefined);
           }}
-          onConfirm={() => handleSelect(selectedRole._id, selectedUser._id)}
+          onConfirm={() =>
+            selectedRole && selectedUser && handleSelect(selectedRole._id, selectedUser._id)
+          }
           title="Change Role Confirmation"
-          description={`Are you sure you want to change role of ${selectedUser.name} from ${selectedUser.role.name} to ${selectedRole.name}?`}
+          description={`Are you sure you want to change role of ${selectedUser?.name} from ${selectedUser?.role.name} to ${selectedRole?.name}?`}
           confirmText="Change"
           cancelText="Cancel"
         />

@@ -39,6 +39,12 @@ export const Permissions = {
   EDIT_TEAM: "EDIT_TEAM",
   DELETE_TEAM: "DELETE_TEAM",
 
+  // ROLES
+  CREATE_ROLE: "CREATE_ROLE",
+  VIEW_ROLE: "VIEW_ROLE",
+  EDIT_ROLE: "EDIT_ROLE",
+  DELETE_ROLE: "DELETE_ROLE",
+
   VIEW_ONLY: "VIEW_ONLY",
 } as const;
 

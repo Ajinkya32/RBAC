@@ -62,11 +62,6 @@ export type ChangeUserRoleType = {
   roleId: string;
 };
 
-export type RoleType = {
-  _id: string;
-  name: string;
-};
-
 export type DeleteUserResponseType = {
   message: string;
 };
@@ -220,4 +215,17 @@ export type AnalyticsResponseType = {
     pendingOrders: number;
     deliveredOrders: number;
   };
+};
+
+//********** */ ROLE TYPES ************************
+//************************************************* */
+
+export type RoleType = {
+  _id: string;
+  name: string;
+  permissions: PermissionType[];
+};
+
+export type EditRoleResponseType = {
+  message: string;
 };

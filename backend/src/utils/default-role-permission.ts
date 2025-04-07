@@ -34,6 +34,12 @@ export const DefaultRolePermissions: Record<RoleType, Array<PermissionType>> = {
     Permissions.EDIT_TEAM,
     Permissions.DELETE_TEAM,
 
+    // ROLES
+    Permissions.CREATE_ROLE,
+    Permissions.VIEW_ROLE,
+    Permissions.EDIT_ROLE,
+    Permissions.DELETE_ROLE,
+
     Permissions.VIEW_ONLY,
   ],
   MANAGER: [

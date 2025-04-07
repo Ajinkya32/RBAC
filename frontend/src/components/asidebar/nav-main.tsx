@@ -1,6 +1,12 @@
-"use client";
-
-import { LucideIcon, Users, LayoutDashboard, Shield, Warehouse, Logs } from "lucide-react";
+import {
+  LucideIcon,
+  Users,
+  LayoutDashboard,
+  Shield,
+  Warehouse,
+  Logs,
+  KeyRound,
+} from "lucide-react";
 import {
   SidebarGroup,
   SidebarMenu,
@@ -10,7 +16,6 @@ import {
 import { Link, useLocation } from "react-router-dom";
 import { useAuthContext } from "@/context/auth-provider";
 import { Permissions } from "@/constant";
-import useTeamId from "@/hooks/use-team-id";
 
 type ItemType = {
   title: string;
@@ -21,7 +26,6 @@ type ItemType = {
 export function NavMain() {
   const { hasPermission } = useAuthContext();
 
-  const teamId = useTeamId();
   const location = useLocation();
 
   const pathname = location.pathname;
@@ -32,6 +36,14 @@ export function NavMain() {
       url: `/dashboard`,
       icon: LayoutDashboard,
     },
+
+    hasPermission(Permissions.EDIT_ROLE)
+      ? {
+          title: "Roles",
+          url: `/roles`,
+          icon: KeyRound,
+        }
+      : null,
 
     hasPermission(Permissions.VIEW_USER)
       ? {

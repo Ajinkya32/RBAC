@@ -10,10 +10,10 @@ export const PROTECTED_ROUTES = {
   DASHBOARD: "/dashboard",
   USERS: "/users",
   MEMBERS: "/members",
-  SETTINGS: "/site/:teamId/settings",
   PRDOUCTS: "/products",
   TEAMS: "/teams",
   ORDERS: "/orders",
   MYORDERS: "/myorders",
   STORE: "/store",
+  ROLES: "/roles",
 };

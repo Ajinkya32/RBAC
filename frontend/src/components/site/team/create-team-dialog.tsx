@@ -15,7 +15,7 @@ const CreateTeamDialog = () => {
   return (
     <div>
       <Dialog modal={true} open={isOpen} onOpenChange={setIsOpen}>
-        <PermissionsGuard requiredPermission={Permissions.CREATE_PRODUCT}>
+        <PermissionsGuard requiredPermission={Permissions.CREATE_TEAM}>
           <DialogTrigger>
             <Button>
               <Plus />

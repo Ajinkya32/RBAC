@@ -27,17 +27,14 @@ import Logo from "@/components/logo";
 import LogoutDialog from "./logout-dialog";
 import { TeamSwitcher } from "./team-switcher";
 import { NavMain } from "./nav-main";
-import { NavPages } from "./nav-pages";
 import { Separator } from "../ui/separator";
 import { useAuthContext } from "@/context/auth-provider";
-import useTeamId from "@/hooks/use-team-id";
 import { NavTeam } from "./nav-team";
 
 const Asidebar = () => {
   const { isLoading, user } = useAuthContext();
 
   const { open } = useSidebar();
-  const teamId = useTeamId();
 
   const [isOpen, setIsOpen] = useState(false);
 

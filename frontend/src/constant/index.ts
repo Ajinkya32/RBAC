@@ -1,20 +1,3 @@
-export const TaskStatusEnum = {
-  BACKLOG: "BACKLOG",
-  TODO: "TODO",
-  IN_PROGRESS: "IN_PROGRESS",
-  IN_REVIEW: "IN_REVIEW",
-  DONE: "DONE",
-} as const;
-
-export const TaskPriorityEnum = {
-  LOW: "LOW",
-  MEDIUM: "MEDIUM",
-  HIGH: "HIGH",
-  URGENT: "URGENT",
-} as const;
-export type TaskStatusEnumType = keyof typeof TaskStatusEnum;
-export type TaskPriorityEnumType = keyof typeof TaskPriorityEnum;
-
 export const Permissions = {
   // PRODUCTS
   CREATE_PRODUCT: "CREATE_PRODUCT",
@@ -47,6 +30,12 @@ export const Permissions = {
   VIEW_TEAM: "VIEW_TEAM",
   EDIT_TEAM: "EDIT_TEAM",
   DELETE_TEAM: "DELETE_TEAM",
+
+  // ROLES
+  CREATE_ROLE: "CREATE_ROLE",
+  VIEW_ROLE: "VIEW_ROLE",
+  EDIT_ROLE: "EDIT_ROLE",
+  DELETE_ROLE: "DELETE_ROLE",
 
   VIEW_ONLY: "VIEW_ONLY",
 } as const;

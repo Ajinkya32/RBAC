@@ -15,7 +15,7 @@ const AddUserDialog = () => {
   return (
     <div>
       <Dialog modal={true} open={isOpen} onOpenChange={setIsOpen}>
-        <PermissionsGuard requiredPermission={Permissions.CREATE_MEMBER}>
+        <PermissionsGuard requiredPermission={Permissions.CREATE_USER}>
           <DialogTrigger className="mt-1.5" asChild>
             <Button>
               <Plus />
