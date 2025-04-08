@@ -80,7 +80,7 @@ export default function StoreList() {
   }
 
   return (
-    <div className="w-full relative flex flex-wrap gap-4 md:gap-4">
+    <div className="w-full relative flex flex-wrap gap-4 md:gap-6 lg:gap-8 justify-center md:justify-center lg:justify-between">
       {data?.map((product: ProductType) => (
         <div
           key={product._id}

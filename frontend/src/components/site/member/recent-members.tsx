@@ -47,7 +47,7 @@ const RecentMembers = () => {
               </div>
 
               {/* Joined Date */}
-              <div className="ml-auto text-sm text-gray-500">
+              <div className="ml-auto text-sm text-gray-500 w-32">
                 <p>Joined</p>
                 <p>{member.createdAt ? format(member.createdAt, "PPP") : null}</p>
               </div>

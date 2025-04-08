@@ -46,7 +46,7 @@ const RecentOrders = () => {
               className="flex items-center justify-between p-3 rounded-lg border border-gray-200 hover:bg-gray-50"
             >
               {/* Avatar */}
-              <div className="flex flex-row gap-4 items-center">
+              <div className="flex flex-row gap-4 items-center w-32">
                 <Avatar className="h-9 w-9 sm:flex">
                   <AvatarFallback className={avatarColor}>{initials}</AvatarFallback>
                 </Avatar>
@@ -58,23 +58,23 @@ const RecentOrders = () => {
                 </div>
               </div>
 
-              {/* Tean Details */}
-              <div className="flex flex-col">
+              {/* Team Details */}
+              <div className="hidden md:flex flex-col w-32">
                 <p className="text-sm font-medium text-gray-900">{order.team.name}</p>
               </div>
 
               {/* Product Details */}
-              <div className="flex flex-col">
+              <div className="hidden md:flex flex-col w-32">
                 <p className="text-sm font-medium text-gray-900">{order.product.name}</p>
               </div>
 
               {/* Order Details */}
-              <div className="flex flex-col">
+              <div className="hidden md:flex flex-col w-32">
                 <p className="text-sm font-medium text-gray-900">{order.status}</p>
               </div>
 
               {/* Joined Date */}
-              <div className="text-sm text-gray-500">
+              <div className="text-sm text-gray-500 w-32">
                 <p>Created At</p>
                 <p>{order.createdAt ? format(order.createdAt, "PPP") : null}</p>
               </div>
