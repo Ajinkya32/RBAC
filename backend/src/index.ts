@@ -1,5 +1,4 @@
 import { networkInterfaces, NetworkInterfaceInfo } from "os";
-
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
@@ -8,7 +7,6 @@ import MongoStore from "connect-mongo";
 import { config } from "./config/app.config";
 import connectDatabase from "./config/database.config";
 import { errorHandler } from "./middlewares/errorHandler.middleware";
-
 import "./config/passport.config";
 import passport from "passport";
 import authRoutes from "./routes/auth.route";
@@ -17,11 +15,8 @@ import teamRoutes from "./routes/team.route";
 import memberRoutes from "./routes/member.route";
 import productRoutes from "./routes/product.route";
 import orderRoutes from "./routes/order.route";
-
 import isAuthenticated from "./middlewares/isAuthenticated.middleware";
-
 import path from "path";
-
 import multer from "multer";
 
 const app = express();
@@ -38,7 +33,6 @@ app.use(
 
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ limit: "10mb", extended: true }));
-// app.use(upload.any());
 
 const publicDir = path.resolve(__dirname, "../public");
 app.use(express.static(publicDir));
@@ -73,15 +67,17 @@ app.use(`${BASE_PATH}/order`, isAuthenticated, orderRoutes);
 app.use("/uploads", express.static(path.join(__dirname, "../public/uploads")));
 
 // For production
-// app.use(express.static(path.join(__dirname, "../../frontend/dist")));
+if (process.env.NODE_ENV?.trim().toLowerCase() === "production") {
+  app.use(express.static(path.join(__dirname, "../../frontend/dist")));
 
-// app.get("*", (req, res) => {
-//   try {
-//     res.sendFile(path.resolve(__dirname, "../../frontend/dist/index.html"));
-//   } catch (error: any) {
-//     throw new Error(error);
-//   }
-// });
+  app.get("*", (req, res) => {
+    try {
+      res.sendFile(path.resolve(__dirname, "../../frontend/dist/index.html"));
+    } catch (error: any) {
+      throw new Error(error);
+    }
+  });
+}
 
 app.use(errorHandler);
 
