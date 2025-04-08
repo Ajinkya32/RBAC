@@ -17,11 +17,9 @@ import {
   LoginResponseType,
   loginType,
   registerType,
-  AnalyticsResponseType,
   ChangeUserRoleType,
   CreateMemberType,
   CreateMemberResponseType,
-  GetTeamMembersResponseType,
   DeleteMembersResponseType,
   CreateOrderType,
   CreateOrderResponseType,
@@ -43,11 +41,6 @@ export const logoutMutationFn = async () => await API.post("/auth/logout");
 
 export const getCurrentUserQueryFn = async (): Promise<CurrentUserResponseType> => {
   const response = await API.get(`/user/current`);
-  return response.data;
-};
-
-export const getSiteAnalyticsQueryFn = async (siteId: string): Promise<AnalyticsResponseType> => {
-  const response = await API.get(`/site/analytics/${siteId}`);
   return response.data;
 };
 
@@ -163,16 +156,20 @@ export const fetchManagers = async () => {
   return response.data.managers;
 };
 
-export const getTeamAnalyticsQueryFn = async (teamId: string): Promise<AnalyticsResponseType> => {
+export const getTeamAnalyticsQueryFn = async (teamId: string) => {
+  if (!teamId) {
+    return [];
+  }
   const response = await API.get(`/team/analytics/${teamId}`);
   return response.data;
 };
 
 //******* MEMBERS ********************************
 //************************* */
-export const getMembersInTeamQueryFn = async (
-  teamId: string
-): Promise<GetTeamMembersResponseType> => {
+export const getMembersInTeamQueryFn = async (teamId: string) => {
+  if (!teamId) {
+    return [];
+  }
   const response = await API.get(`/member/team/${teamId}`);
   return response.data.members;
 };
@@ -203,7 +200,7 @@ export const createOrderMutationFn = async (
 
 export const getAllOrdersQueryFn = async (teamId: string) => {
   if (!teamId) {
-    return;
+    return [];
   }
   const response = await API.get(`/order/team/${teamId}`);
   return response.data.orders;
