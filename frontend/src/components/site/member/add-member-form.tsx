@@ -10,7 +10,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
   Select,
@@ -24,7 +23,7 @@ import { toast } from "@/hooks/use-toast";
 
 import { Loader } from "lucide-react";
 import { useAuthContext } from "@/context/auth-provider";
-import { CreateMemberType } from "@/types/api.type";
+import { CreateMemberType, UserType } from "@/types/api.type";
 
 export default function AddMemberForm(props: { onClose?: () => void }) {
   const { onClose } = props;
@@ -101,7 +100,7 @@ export default function AddMemberForm(props: { onClose?: () => void }) {
                           <SelectValue placeholder={rolesLoading ? "Loading..." : "Select Role"} />
                         </SelectTrigger>
                         <SelectContent>
-                          {users.map((user: any) => (
+                          {users.map((user: UserType) => (
                             <SelectItem key={user._id} value={user._id}>
                               {user.name}
                             </SelectItem>

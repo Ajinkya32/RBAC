@@ -1,4 +1,4 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { useAuthContext } from "@/context/auth-provider";
 import useGetTeamMembers from "@/hooks/api/use-get-team-members";
 
@@ -23,7 +23,7 @@ const RecentMembers = () => {
       ) : null}
 
       <ul role="list" className="space-y-3">
-        {members?.map((member: MemberType, index) => {
+        {members?.map((member: MemberType, index: number) => {
           const name = member?.user?.name || "";
           const initials = getAvatarFallbackText(name);
           const avatarColor = getAvatarColor(name);

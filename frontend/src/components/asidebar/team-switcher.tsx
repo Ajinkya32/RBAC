@@ -1,6 +1,4 @@
-import * as React from "react";
-import { Check, ChevronDown, Loader, Plus } from "lucide-react";
-
+import { Check, ChevronDown, Loader } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,19 +15,14 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { getAllTeamsUserIsMemberQueryFn, setCurrentTeam } from "@/lib/api";
-import PermissionsGuard from "../resuable/permission-guard";
-import { Permissions } from "@/constant";
-import useCreateTeamDialog from "@/hooks/use-create-team-dialog";
 import { useAuthContext } from "@/context/auth-provider";
 import { TeamType } from "@/types/api.type";
 
 export function TeamSwitcher() {
-  const queryClient = useQueryClient();
   const { isMobile } = useSidebar();
 
-  const { onOpen } = useCreateTeamDialog();
   const { activeTeamId, setActiveTeamId, setTeam, team } = useAuthContext();
 
   const { data, isPending } = useQuery({
@@ -51,14 +44,6 @@ export function TeamSwitcher() {
     <>
       <SidebarGroupLabel className="w-full justify-between pr-0">
         <span>Teams</span>
-        {/* <PermissionsGuard requiredPermission={Permissions.CREATE_TEAM}>
-          <button
-            onClick={onOpen}
-            className="flex size-5 items-center justify-center rounded-full border"
-          >
-            <Plus className="size-3.5" />
-          </button>
-        </PermissionsGuard> */}
       </SidebarGroupLabel>
       <SidebarMenu>
         <SidebarMenuItem>
@@ -94,7 +79,7 @@ export function TeamSwitcher() {
               <DropdownMenuLabel className="text-xs text-muted-foreground">Teams</DropdownMenuLabel>
               {isPending ? <Loader className=" w-5 h-5 animate-spin" /> : null}
 
-              {teams?.map((team: any) => (
+              {teams?.map((team: TeamType) => (
                 <DropdownMenuItem
                   key={team._id}
                   onClick={() => onSelect(team)}
@@ -113,14 +98,6 @@ export function TeamSwitcher() {
                 </DropdownMenuItem>
               ))}
               <DropdownMenuSeparator />
-              {/* <PermissionsGuard requiredPermission={Permissions.CREATE_TEAM}>
-                <DropdownMenuItem className="gap-2 p-2 !cursor-pointer" onClick={onOpen}>
-                  <div className="flex size-6 items-center justify-center rounded-md border bg-background">
-                    <Plus className="size-4" />
-                  </div>
-                  <div className="font-medium text-muted-foreground">Add team</div>
-                </DropdownMenuItem>
-              </PermissionsGuard> */}
             </DropdownMenuContent>
           </DropdownMenu>
         </SidebarMenuItem>

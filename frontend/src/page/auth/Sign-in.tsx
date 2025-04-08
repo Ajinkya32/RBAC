@@ -1,4 +1,4 @@
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -21,8 +21,6 @@ import { Loader } from "lucide-react";
 
 const SignIn = () => {
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
-  const returnUrl = searchParams.get("returnUrl");
 
   const { mutate, isPending } = useMutation({
     mutationFn: loginMutationFn,
@@ -49,7 +47,7 @@ const SignIn = () => {
     if (isPending) return;
 
     mutate(values, {
-      onSuccess: (data) => {
+      onSuccess: () => {
         navigate("/dashboard");
       },
       onError: (error) => {
