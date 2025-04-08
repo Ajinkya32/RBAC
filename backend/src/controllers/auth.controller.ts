@@ -74,7 +74,7 @@ export const updateRolePermissionsController = asyncHandler(async (req, res) => 
 
   const { role } = await getUserRole(req.user?._id);
 
-  roleGuard(role, [Permissions.EDIT_ROLE]);
+  await roleGuard(role, [Permissions.EDIT_ROLE]);
 
   await updateRolePermissionsService(roleId, permissions);
 

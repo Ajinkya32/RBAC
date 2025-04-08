@@ -20,7 +20,7 @@ import { createUserSchema, updateUserSchema } from "../validation/user.validatio
 export const getAllUserController = asyncHandler(async (req: Request, res: Response) => {
   const { role } = await getUserRole(req.user?._id);
 
-  roleGuard(role, [Permissions.VIEW_USER]);
+  await roleGuard(role, [Permissions.VIEW_USER]);
 
   const users = await getAllUserService();
 
@@ -48,7 +48,7 @@ export const createUserController = asyncHandler(async (req: Request, res: Respo
 
   const { role } = await getUserRole(req.user?._id);
 
-  roleGuard(role, [Permissions.CREATE_USER]);
+  await roleGuard(role, [Permissions.CREATE_USER]);
 
   await createUserService(body);
 
@@ -64,7 +64,7 @@ export const changeUserRoleController = asyncHandler(async (req: Request, res: R
 
   const { role } = await getUserRole(req.user?._id);
 
-  roleGuard(role, [Permissions.CHANGE_MEMBER_ROLE]);
+  await roleGuard(role, [Permissions.CHANGE_MEMBER_ROLE]);
 
   const { user } = await changeUserRoleService(userId, roleId);
 
@@ -82,7 +82,7 @@ export const updateUserController = asyncHandler(async (req: Request, res: Respo
 
   const { role } = await getUserRole(req.user?._id);
 
-  roleGuard(role, [Permissions.EDIT_USER]);
+  await roleGuard(role, [Permissions.EDIT_USER]);
 
   const { user } = await updateUserService(userId, body);
 
@@ -97,7 +97,7 @@ export const deleteUserController = asyncHandler(async (req: Request, res: Respo
 
   const { role } = await getUserRole(req.user?._id);
 
-  roleGuard(role, [Permissions.DELETE_USER]);
+  await roleGuard(role, [Permissions.DELETE_USER]);
 
   await deleteUserService(userId);
 
@@ -109,7 +109,7 @@ export const deleteUserController = asyncHandler(async (req: Request, res: Respo
 export const getAllManagersController = asyncHandler(async (req: Request, res: Response) => {
   const { role } = await getUserRole(req.user?._id);
 
-  roleGuard(role, [Permissions.VIEW_USER]);
+  await roleGuard(role, [Permissions.VIEW_USER]);
 
   const managers = await getAllManagersService();
 

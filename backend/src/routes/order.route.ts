@@ -20,7 +20,7 @@ orderRoutes.post("/create", createOrderController);
 
 orderRoutes.put("/update/:id", updateOrderController);
 
-orderRoutes.delete("/delete/:id", deleteOrderController);
+orderRoutes.put("/delete/:id", deleteOrderController);
 
 orderRoutes.get("/team/:id", getTeamOrdersController);
 

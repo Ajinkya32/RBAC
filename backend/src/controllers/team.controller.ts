@@ -28,7 +28,7 @@ export const createTeamController = asyncHandler(async (req: Request, res: Respo
 
   const { role } = await getUserRole(req.user?._id);
 
-  roleGuard(role, [Permissions.CREATE_USER]);
+  await roleGuard(role, [Permissions.CREATE_USER]);
 
   const { team } = await createTeamService(body);
 
@@ -41,7 +41,7 @@ export const createTeamController = asyncHandler(async (req: Request, res: Respo
 export const getAllTeamsController = asyncHandler(async (req: Request, res: Response) => {
   const { role } = await getUserRole(req.user?._id);
 
-  roleGuard(role, [Permissions.VIEW_TEAM]);
+  await roleGuard(role, [Permissions.VIEW_TEAM]);
 
   const teams = await getAllTeamsService();
 
@@ -108,7 +108,7 @@ export const updateTeamByIdController = asyncHandler(async (req: Request, res: R
 
   const { role } = await getUserRole(req.user?._id);
 
-  roleGuard(role, [Permissions.EDIT_TEAM]);
+  await roleGuard(role, [Permissions.EDIT_TEAM]);
 
   const { team } = await updateTeamByIdService(teamId, updateData);
 
@@ -123,7 +123,7 @@ export const deleteTeamByIdController = asyncHandler(async (req: Request, res: R
 
   const { role } = await getUserRole(req.user?._id);
 
-  roleGuard(role, [Permissions.DELETE_TEAM]);
+  await roleGuard(role, [Permissions.DELETE_TEAM]);
 
   const { currentTeam } = await deleteTeamService(teamId);
 

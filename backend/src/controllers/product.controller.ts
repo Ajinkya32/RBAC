@@ -24,7 +24,7 @@ export const createProductController = asyncHandler(async (req: Request, res: Re
 
   const { role } = await getUserRole(userId);
 
-  roleGuard(role, [Permissions.CREATE_PRODUCT]);
+  await roleGuard(role, [Permissions.CREATE_PRODUCT]);
 
   const imageFile = req.file;
 
@@ -71,7 +71,7 @@ export const updateProductController = asyncHandler(async (req: Request, res: Re
 
   const { role } = await getUserRole(req.user?._id);
 
-  roleGuard(role, [Permissions.EDIT_PRODUCT]);
+  await roleGuard(role, [Permissions.EDIT_PRODUCT]);
 
   let imageURL;
 
@@ -93,7 +93,7 @@ export const deleteProductController = asyncHandler(async (req: Request, res: Re
 
   const { role } = await getUserRole(req.user?._id);
 
-  roleGuard(role, [Permissions.DELETE_PRODUCT]);
+  await roleGuard(role, [Permissions.DELETE_PRODUCT]);
 
   const deletedProduct = await deleteProductService(productId);
 

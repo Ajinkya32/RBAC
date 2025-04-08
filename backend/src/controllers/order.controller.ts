@@ -26,7 +26,7 @@ export const createOrderController = asyncHandler(async (req: Request, res: Resp
 
   const { role } = await getUserRole(userId);
 
-  roleGuard(role, [Permissions.CREATE_ORDER]);
+  await roleGuard(role, [Permissions.CREATE_ORDER]);
 
   const newOrder = await createOrderService(userId, body);
 
@@ -64,7 +64,7 @@ export const updateOrderController = asyncHandler(async (req: Request, res: Resp
 
   const { role } = await getUserRole(req.user?._id);
 
-  roleGuard(role, [Permissions.EDIT_ORDER]);
+  await roleGuard(role, [Permissions.EDIT_ORDER]);
 
   const updatedOrder = await updateOrderService(orderId, body);
 
@@ -79,7 +79,7 @@ export const deleteOrderController = asyncHandler(async (req: Request, res: Resp
 
   const { role } = await getUserRole(req.user?._id);
 
-  roleGuard(role, [Permissions.DELETE_ORDER]);
+  await roleGuard(role, [Permissions.DELETE_ORDER]);
 
   const deletedOrder = await deleteOrderService(orderId);
 
@@ -94,7 +94,7 @@ export const getTeamOrdersController = asyncHandler(async (req: Request, res: Re
 
   const { role } = await getUserRole(req.user?._id);
 
-  roleGuard(role, [Permissions.VIEW_ORDER]);
+  await roleGuard(role, [Permissions.VIEW_ORDER]);
 
   const { orders } = await getTeamOrdersService(teamId);
 

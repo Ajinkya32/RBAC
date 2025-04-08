@@ -22,7 +22,7 @@ export const createMemberController = asyncHandler(async (req: Request, res: Res
 
   const { role } = await getUserRole(req.user?._id);
 
-  roleGuard(role, [Permissions.CREATE_USER]);
+  await roleGuard(role, [Permissions.CREATE_USER]);
 
   const newMember = await createMemberService(userId, teamId);
 
@@ -37,7 +37,7 @@ export const deleteMemberController = asyncHandler(async (req: Request, res: Res
 
   const { role } = await getUserRole(req.user?._id);
 
-  roleGuard(role, [Permissions.DELETE_MEMBER]);
+  await roleGuard(role, [Permissions.DELETE_MEMBER]);
 
   const { deletedMember } = await deleteMemberService(memberId);
 
@@ -52,7 +52,7 @@ export const getTeamMembersController = asyncHandler(async (req: Request, res: R
 
   const { role } = await getUserRole(req.user?._id);
 
-  roleGuard(role, [Permissions.VIEW_MEMBER]);
+  await roleGuard(role, [Permissions.VIEW_MEMBER]);
 
   const { members } = await getTeamMembersService(teamId);
 
