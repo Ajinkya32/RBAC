@@ -30,24 +30,24 @@ import {
 } from "@/types/api.type";
 
 export const loginMutationFn = async (data: loginType): Promise<LoginResponseType> => {
-  const response = await API.post("/auth/login", data);
+  const response = await API.post("/api/auth/login", data);
   return response.data;
 };
 
 export const registerMutationFn = async (data: registerType) =>
-  await API.post("/auth/register", data);
+  await API.post("/api/auth/register", data);
 
-export const logoutMutationFn = async () => await API.post("/auth/logout");
+export const logoutMutationFn = async () => await API.post("/api/auth/logout");
 
 export const getCurrentUserQueryFn = async (): Promise<CurrentUserResponseType> => {
-  const response = await API.get(`/user/current`);
+  const response = await API.get(`/api/user/current`);
   return response.data;
 };
 
 //******* USERS ********************************
 //************************* */
 export const getUsersQueryFn = async (): Promise<AllUsersResponseType> => {
-  const response = await API.get("/user/all");
+  const response = await API.get("/api/user/all");
 
   return response.data.users;
 };
@@ -55,27 +55,27 @@ export const getUsersQueryFn = async (): Promise<AllUsersResponseType> => {
 export const createUserMutationFn = async (
   data: CreateUserType
 ): Promise<CreateUserResponseType> => {
-  const response = await API.post(`/user/create`, data);
+  const response = await API.post(`/api/user/create`, data);
   return response.data;
 };
 
 export const changeUserRoleMutationFn = async ({ userId, roleId }: ChangeUserRoleType) => {
-  const response = await API.put(`/user/update/role/${userId}`, { roleId: roleId });
+  const response = await API.put(`/api/user/update/role/${userId}`, { roleId: roleId });
   return response.data;
 };
 
 export const fetchTeams = async () => {
-  const response = await API.get("/team");
+  const response = await API.get("/api/team");
   return response.data.teams;
 };
 
 export const setCurrentTeam = async (teamId: string) => {
-  const response = await API.put(`/user/setCurrentTeam/${teamId}`);
+  const response = await API.put(`/api/user/setCurrentTeam/${teamId}`);
   return response.data.user;
 };
 
 export const deleteUserMutationFn = async (userId: string): Promise<DeleteUserResponseType> => {
-  const response = await API.put(`/user/delete/${userId}`);
+  const response = await API.put(`/api/user/delete/${userId}`);
   return response.data;
 };
 
@@ -85,12 +85,12 @@ export const deleteUserMutationFn = async (userId: string): Promise<DeleteUserRe
 export const createProductMutationFn = async (
   data: CreateProductType
 ): Promise<CreateProductResponseType> => {
-  const response = await API.post(`/product/create`, data, { headers: {} });
+  const response = await API.post(`/api/product/create`, data, { headers: {} });
   return response.data;
 };
 
 export const getAllProductsQueryFn = async () => {
-  const response = await API.get("/product");
+  const response = await API.get("/api/product");
   return response.data.products;
 };
 
@@ -101,12 +101,12 @@ export const updateProductMutationFn = async ({
   id: string;
   data: EditProductType;
 }): Promise<EditProductResponseType> => {
-  const response = await API.put(`/product/update/${id}`, data, { headers: {} });
+  const response = await API.put(`/api/product/update/${id}`, data, { headers: {} });
   return response.data.products;
 };
 
 export const deleteProductMutationFn = async (id: string) => {
-  const response = await API.put(`/product/delete/${id}`);
+  const response = await API.put(`/api/product/delete/${id}`);
   return response.data.products;
 };
 
@@ -116,22 +116,22 @@ export const deleteProductMutationFn = async (id: string) => {
 export const createTeamMutationFn = async (
   data: CreateTeamType
 ): Promise<CreateTeamResponseType> => {
-  const response = await API.post(`/team/create`, data);
+  const response = await API.post(`/api/team/create`, data);
   return response.data;
 };
 
 export const getAllTeamsQueryFn = async () => {
-  const response = await API.get("/team");
+  const response = await API.get("/api/team");
   return response.data.teams;
 };
 
 export const getTeamByIdQueryFn = async (id: string) => {
-  const response = await API.get(`/team/${id}`);
+  const response = await API.get(`/api/team/${id}`);
   return response.data.team;
 };
 
 export const getAllTeamsUserIsMemberQueryFn = async () => {
-  const response = await API.get(`/team/myTeams`);
+  const response = await API.get(`/api/team/myTeams`);
   return response.data.teams;
 };
 
@@ -142,17 +142,17 @@ export const editTeamMutationFn = async ({
   id: string;
   data: EditTeamType;
 }): Promise<EditTeamResponseType> => {
-  const response = await API.put(`/team/update/${id}`, data);
+  const response = await API.put(`/api/team/update/${id}`, data);
   return response.data.products;
 };
 
 export const deleteTeamMutationFn = async (id: string) => {
-  const response = await API.put(`/team/delete/${id}`);
+  const response = await API.put(`/api/team/delete/${id}`);
   return response.data.products;
 };
 
 export const fetchManagers = async () => {
-  const response = await API.get("/user/managers");
+  const response = await API.get("/api/user/managers");
   return response.data.managers;
 };
 
@@ -160,7 +160,7 @@ export const getTeamAnalyticsQueryFn = async (teamId: string) => {
   if (!teamId) {
     return [];
   }
-  const response = await API.get(`/team/analytics/${teamId}`);
+  const response = await API.get(`/api/team/analytics/${teamId}`);
   return response.data;
 };
 
@@ -170,21 +170,21 @@ export const getMembersInTeamQueryFn = async (teamId: string) => {
   if (!teamId) {
     return [];
   }
-  const response = await API.get(`/member/team/${teamId}`);
+  const response = await API.get(`/api/member/team/${teamId}`);
   return response.data.members;
 };
 
 export const createMemberMutationFn = async (
   data: CreateMemberType
 ): Promise<CreateMemberResponseType> => {
-  const response = await API.post(`/member/create`, data);
+  const response = await API.post(`/api/member/create`, data);
   return response.data;
 };
 
 export const deleteMemberMutationFn = async (
   memberId: string
 ): Promise<DeleteMembersResponseType> => {
-  const response = await API.put(`/member/delete/${memberId}`);
+  const response = await API.put(`/api/member/delete/${memberId}`);
   return response.data;
 };
 
@@ -194,7 +194,7 @@ export const deleteMemberMutationFn = async (
 export const createOrderMutationFn = async (
   data: CreateOrderType
 ): Promise<CreateOrderResponseType> => {
-  const response = await API.post(`/order/create`, data, { headers: {} });
+  const response = await API.post(`/api/order/create`, data, { headers: {} });
   return response.data;
 };
 
@@ -202,17 +202,17 @@ export const getAllOrdersQueryFn = async (teamId: string) => {
   if (!teamId) {
     return [];
   }
-  const response = await API.get(`/order/team/${teamId}`);
+  const response = await API.get(`/api/order/team/${teamId}`);
   return response.data.orders;
 };
 
 export const getMyOrdersQueryFn = async () => {
-  const response = await API.get(`/order/myorders`);
+  const response = await API.get(`/api/order/myorders`);
   return response.data.orders;
 };
 
 export const getMyOrdersAnalyticsFn = async () => {
-  const response = await API.get(`/order/myorders/analytics`);
+  const response = await API.get(`/api/order/myorders/analytics`);
   return response.data;
 };
 
@@ -223,12 +223,12 @@ export const updateOrderMutationFn = async ({
   id: string;
   data: EditOrderType;
 }): Promise<EditOrderResponseType> => {
-  const response = await API.put(`/order/update/${id}`, data, { headers: {} });
+  const response = await API.put(`/api/order/update/${id}`, data, { headers: {} });
   return response.data.orders;
 };
 
 export const deleteOrderMutationFn = async (id: string) => {
-  const response = await API.put(`/order/delete/${id}`);
+  const response = await API.put(`/api/order/delete/${id}`);
   return response.data.orders;
 };
 
@@ -236,7 +236,7 @@ export const deleteOrderMutationFn = async (id: string) => {
 //************************* */
 
 export const fetchRolesQueryFn = async () => {
-  const response = await API.get("/auth/roles/all");
+  const response = await API.get("/api/auth/roles/all");
   return response.data.roles;
 };
 
@@ -247,6 +247,6 @@ export const editRoleMutationFn = async ({
   roleId: string;
   permissions: PermissionType[];
 }): Promise<EditRoleResponseType> => {
-  const response = await API.put(`/auth/roles/update/${roleId}`, { permissions });
+  const response = await API.put(`/api/auth/roles/update/${roleId}`, { permissions });
   return response.data.roles;
 };
