@@ -47,7 +47,7 @@ const Asidebar = () => {
             {open && (
               <Link
                 to="/dashboard"
-                className="hidden md:flex ml-2 items-center gap-2 self-center font-medium"
+                className="flex ml-2 items-center gap-2 self-center font-medium"
               >
                 RBAC
               </Link>
