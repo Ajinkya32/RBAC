@@ -83,8 +83,8 @@ A Role-Based Access Control (RBAC) system built using the MERN stack (MongoDB, E
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/access-manager.git
-cd access-manager
+git clone https://github.com/Ajinkya32/RBAC.git
+cd RBAC
 ```
 
 ---
