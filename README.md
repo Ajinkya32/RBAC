@@ -36,6 +36,7 @@ A Role-Based Access Control (RBAC) system built using the MERN stack (MongoDB, E
    ```bash
    npm run dev
    ```
+6. Access the backend at `http://localhost:8000`.
 
 ---
 
@@ -54,3 +55,4 @@ A Role-Based Access Control (RBAC) system built using the MERN stack (MongoDB, E
    ```bash
    npm run dev
    ```
+5. Access the frontend at `http://localhost:5173`.
