@@ -4,6 +4,19 @@ A Role-Based Access Control (RBAC) system built using the MERN stack (MongoDB, E
 
 Live Link: https://rbac.ajinkyadev.com/
 
+Test credentials:
+1. Admin
+Email: admin@gmail.com
+Password: admin
+
+2. Manager
+Email: manager1@gmail.com
+Password: manager
+
+3. Employee
+Email: employee1@gmail.com
+Password: employee
+
 ---
 
 ## 🔧 Features
