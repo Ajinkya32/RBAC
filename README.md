@@ -6,16 +6,16 @@ Live Link: https://rbac.ajinkyadev.com/
 
 Test credentials:
 1. Admin
-Email: admin@gmail.com
-Password: admin
+- Email: admin@gmail.com
+- Password: admin
 
 2. Manager
-Email: manager1@gmail.com
-Password: manager
+- Email: manager1@gmail.com
+- Password: manager
 
 3. Employee
-Email: employee1@gmail.com
-Password: employee
+- Email: employee1@gmail.com
+- Password: employee
 
 ---
 
