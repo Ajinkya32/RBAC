@@ -61,7 +61,7 @@ export function NavMain() {
         }
       : null,
 
-    hasPermission(Permissions.EDIT_PRODUCT)
+    hasPermission(Permissions.VIEW_PRODUCT)
       ? {
           title: "Products",
           url: `/products`,
