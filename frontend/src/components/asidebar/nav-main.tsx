@@ -37,7 +37,7 @@ export function NavMain() {
       icon: LayoutDashboard,
     },
 
-    hasPermission(Permissions.EDIT_ROLE)
+    hasPermission(Permissions.VIEW_ROLE)
       ? {
           title: "Roles",
           url: `/roles`,
